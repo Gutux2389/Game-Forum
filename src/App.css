@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+.text{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.hovereffect{
+  position: relative;
+}
+.profileName{
+  float:left;
+  display:inline;
+  font-size: large;
+  margin-top: 15px;
+}
+
+.profilePicDiv {
+  width: 50px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    float: left;
+    border-radius: 50%;
+}
+.profilePic{
+  display: inline;
+  margin: 0 auto;
+  margin-left: -25%;
+  height: 100%;
+  width: auto;
+  }
+.profilePic2{
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}

@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React from 'react';
+import {Manageaccount} from './components/Manageaccounts';
+import { Products } from './components/products';
+import {Chosenproduct} from './components/chosenproduct';
+import { Route,Routes } from 'react-router-dom';
+import Nav from './components/navigation';
+import Home from './components/home';
+import { useState } from 'react';
+import { Profile } from './components/profile';
+function App(){
+  const [pic,setPic] = useState('');
+  return(
+    <>
+      <Nav pic={pic.name}/>
+        <Routes>
+            <Route path="/home" element={<Home />} />
+						<Route path="/products/:name" element={<Chosenproduct />}/>
+            <Route path="products" element={<Products />}/>
+            <Route path="/profile" element={<Profile getProfilePic={setPic}/>} />
+				</Routes>
+    </>
+  )
 }
-
 export default App;
