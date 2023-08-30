@@ -52,7 +52,6 @@ try {
 					<div class="hovereffect">
 					<img style={{width:300,height:200}} onClick={()=>{
 						navigate(`/products/${result.name}`,{state: result});
-						navigate(0);
 						}} alt="" src={result.background_image}
 					onMouseOver={()=>showoverlay(result.id)} onMouseLeave={()=>hideoverlay()}/>
 

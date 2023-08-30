@@ -20,8 +20,11 @@ export function Manageaccount({pic}){
   useEffect(()=>{
     if(cookie != null){
       const getImgRef = ref(storage,`${cookie.data.name}/`);
+      console.log(getImgRef);
       listAll(getImgRef).then((response)=>{
         if(response.items.length === 0){
+          setProfilePic('logo192.png');
+        }else if(response.items.length === null){
           setProfilePic('logo192.png');
         }else if(pic != undefined || cookie != null){
           getDownloadURL(response.items[0]).then((url)=>{
@@ -35,6 +38,15 @@ export function Manageaccount({pic}){
   useEffect(()=>{
     loadImage(setImgDimensions,profilePic);
   },[profilePic])
+  useEffect(()=>{
+    if(users != []){
+      for(let i =0;i < users.length;i++){
+        if(users[i].data.name === name && users[i].data.password === password){
+          setCookie(users[i]);
+        }
+      }
+    }
+  },[users])
   const loadImage = (setImgDimensions,profilePic) =>{
     const img = new Image();
     img.src = profilePic;
@@ -50,9 +62,10 @@ export function Manageaccount({pic}){
       console.error(err)
     }
   }
-  const handlesignup = (e)=>{
+  const handlesignup = async (e)=>{
     e.preventDefault();
-    addDoc(collectionref,{name:name,password:password}).catch(error =>{console.log(error)})
+    await addDoc(collectionref,{name:name,password:password}).catch(error =>{console.log(error)})
+    window.location.reload()
   }
 
   const handlelogin = (e)=>{
@@ -64,13 +77,6 @@ export function Manageaccount({pic}){
       }));
       setUsers(allDocs);
     })
-    if(users != []){
-      for(let i =0;i < users.length;i++){
-        if(users[i].data.name === name && users[i].data.password === password){
-          setCookie(users[i]);
-        }
-      }
-    }
   }
   return(
     <>
@@ -140,6 +146,7 @@ export function Manageaccount({pic}){
         </div>
       </div>
       </div>
+      <button onClick={()=>{window.reload()}}></button>
     </div>
     </div>
 }
